@@ -31,6 +31,7 @@
 
 <script>
 	import alarm from "@/assets/alarm.mp3";
+	import { useToast } from "vue-toastification";
 
 	const FULL_DASH_ARRAY = 283;
 	const WARNING_THRESHOLD = 3*60;
@@ -53,6 +54,11 @@
 	};
 
 	export default {
+		setup() {
+			const toast = useToast();
+			return { toast }
+		},
+
 		data() {
 			return {
 				timePassed: 0,
@@ -127,6 +133,21 @@
 				this.emitter.emit("finished", true);
 				var audio = new Audio(alarm);
 				audio.play();
+
+				this.toast.info("O tempo acabou! Prepare-se e passe para a próxima etapa", {
+					position: "top-center",
+					timeout: 15000,
+					closeOnClick: true,
+					pauseOnFocusLoss: true,
+					pauseOnHover: true,
+					draggable: true,
+					draggablePercent: 0.6,
+					showCloseButtonOnHover: true,
+					hideProgressBar: false,
+					closeButton: "button",
+					icon: true,
+					rtl: false,
+				});
 			},
 
 			startTimer() {

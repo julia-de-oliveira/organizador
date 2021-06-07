@@ -79,7 +79,7 @@
 
       changeStage() {
         this.nowSprint += 1;
-      }
+      },
     },
 
     mounted() {
