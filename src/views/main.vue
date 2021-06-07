@@ -1,5 +1,8 @@
 <template class="bg-dark bg-light">
-  <h1 class="text-center mt-2">{{defineSprint.title}}</h1>
+  <div>
+    <h1 class="text-center mt-2 align-middle">{{defineSprint.title}}</h1>
+    <h3 class="">{{nowSprint/2}}/{{sprintRangeValue}}</h3>
+  </div>
   <Timer :time-left="timeLeft" :TIME_LIMIT="defineSprint.timeLimit"/>
 
   <footer>
