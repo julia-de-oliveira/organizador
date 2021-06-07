@@ -53,7 +53,7 @@
               title: "Trabalhar",
               timeLimit: this.workRangeValue
             }
-        } else if(this.nowSprint%4 === 0) {
+        } else if(this.nowSprint%(this.sprintRangeValue*2) === 0) {
           obj = {
               title: "Descansar",
               timeLimit: this.restRangeValue
