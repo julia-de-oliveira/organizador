@@ -22,7 +22,7 @@
         timerInterval: null,
         timePassed: 0,
 
-        workRangeValue: 3,
+        workRangeValue: 25*60,
         pauseRangeValue: 5*60,
         restRangeValue: 15*60,
         sprintRangeValue: 4,
