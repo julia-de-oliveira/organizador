@@ -31,6 +31,15 @@
       <button class="btn btn-success" type="button" v-on:click="send()"><router-link to="/" class="text-white text-decoration-none">Salvar</router-link></button>
     </div>
   </form>
+
+  <footer>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>Made by <a href="https://julyandphantons.netlify.app/" target="_blank">Me</a> click and see more</p>
+  </footer>
 </template>
 
 <script>
