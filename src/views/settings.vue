@@ -32,19 +32,19 @@
     </div>
   </form>
 
-  <footer>
+  <div class="footer">
     <br>
     <br>
     <br>
     <br>
-    <br>
-    <p>Made by <a href="https://julyandphantons.netlify.app/" target="_blank">Me</a> click and see more</p>
-  </footer>
+    <Footer/>  
+  </div>
 </template>
 
 <script>
-export default {
+import Footer from '@/components/Footer.vue'
 
+export default {
   name: 'settings',
 
   data () {
@@ -57,6 +57,10 @@ export default {
     }
   },
 
+  components: {
+      Footer
+    },
+
   methods: {
     reset() {
       this.configArray.workRangeValue = 25;
@@ -67,10 +71,31 @@ export default {
 
     send() {
       this.emitter.emit("configArray", this.configArray);
+
+      localStorage.workRangeValue = this.configArray.workRangeValue;
+      localStorage.pauseRangeValue = this.configArray.pauseRangeValue;
+      localStorage.restRangeValue = this.configArray.restRangeValue;
+      localStorage.sprintRangeValue = this.configArray.sprintRangeValue;
     }
-  }
+  },
+
+  mounted() {
+      if(localStorage.workRangeValue) this.configArray.timeLimit = localStorage.workRangeValue;
+
+      if(localStorage.workRangeValue) this.configArray.workRangeValue = localStorage.workRangeValue;
+
+      if(localStorage.pauseRangeValue) this.configArray.pauseRangeValue = localStorage.pauseRangeValue;
+      
+      if(localStorage.restRangeValue) this.configArray.restRangeValue = localStorage.restRangeValue;
+      
+      if(localStorage.sprintRangeValue) this.configArray.sprintRangeValue = localStorage.sprintRangeValue;
+    },
 }
 </script>
 
 <style lang="css" scoped>
+.footer {
+  margin-top: 20px;
+  margin-bottom: -50px;
+}
 </style>

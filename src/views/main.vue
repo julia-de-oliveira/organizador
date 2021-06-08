@@ -1,8 +1,4 @@
-<template class="bg-dark bg-light">
-  <div>
-    
-  </div>
-
+<template class="bg-dark bg-light template">
   <div class="container-fluid col-12 d-lg-flex">
     <div class="col-lg-9">
       <h1 class="text-center align-middle">{{defineSprint.title}}</h1>
@@ -15,17 +11,16 @@
       <TodoList/>
     </div>
   </div>
-
-  <footer>
-    <br>
-    <br>
-    <p>Made by <a href="https://julyandphantons.netlify.app/" target="_blank">Julia</a> click and see more</p>
-  </footer>
+  
+  <div class="footer">
+    <Footer/>  
+  </div>
 </template>
 
 <script>
   import Timer from "@/components/Timer.vue";
   import TodoList from '@/components/Todo.vue'
+  import Footer from '@/components/Footer.vue'
 
   export default {
 
@@ -50,6 +45,7 @@
     components: {
       Timer,
       TodoList,
+      Footer
     },
 
     computed: {
@@ -60,30 +56,31 @@
       formattedTotalHours() {
         const totalTime = (((this.workRangeValue + this.pauseRangeValue)*this.sprintRangeValue)-this.pauseRangeValue)/60 + this.restRangeValue/60;
         const hours = Math.floor(totalTime / 60);
-        let seconds = totalTime % 60;
+        let minutes = totalTime % 60;
 
-        if (seconds < 10) {
-          seconds = `0${seconds}`;
+        if (minutes < 10) {
+          minutes = `0${minutes}`;
         }
 
-        return `${hours}:${seconds}`;
+        return `${hours}:${minutes}`;
       },
 
       formattedCurrentHours() {
         let totalTime = 0;
         for (var i = 0; i < this.nowSprint-1; i++) {
-          if(i%2 == 0) totalTime += this.pauseRangeValue/60;
-          else totalTime += this.workRangeValue/60;
+          if(i%2 == 0) totalTime += this.workRangeValue/60;
+          else if(this.nowSprint%(this.sprintRangeValue*2) === 0) totalTime += this.restRangeValue/60;
+          else totalTime += this.pauseRangeValue/60;
         }
 
         const hours = Math.floor(totalTime / 60);
-        let seconds = totalTime % 60;
+        let minutes = totalTime % 60;
 
-        if (seconds < 10) {
-          seconds = `0${seconds}`;
+        if (minutes < 10) {
+          minutes = `0${minutes}`;
         }
 
-        return `${hours}:${seconds}`;
+        return `${hours}:${minutes}`;
       },
 
       defineSprint() {
@@ -133,6 +130,16 @@
         this.sprintRangeValue = config.sprintRangeValue;
       });
 
+      if(localStorage.workRangeValue) this.timeLimit = localStorage.workRangeValue*60;
+
+      if(localStorage.workRangeValue) this.workRangeValue = localStorage.workRangeValue*60;
+
+      if(localStorage.pauseRangeValue) this.pauseRangeValue = localStorage.pauseRangeValue*60;
+      
+      if(localStorage.restRangeValue) this.restRangeValue = localStorage.restRangeValue*60;
+      
+      if(localStorage.sprintRangeValue) this.sprintRangeValue = localStorage.sprintRangeValue;
+
       this.emitter.on("finished", fn => {
         this.finished = fn;
       });
@@ -143,4 +150,8 @@
 </script>
 
 <style lang="scss" scoped>
+.footer {
+  margin-top: 20px;
+  margin-bottom: -15px;
+}
 </style>
