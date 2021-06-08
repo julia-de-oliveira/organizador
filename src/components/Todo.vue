@@ -40,8 +40,9 @@
 			return {
 				todos: [
 					{id: 0, checked: false,text:  "Digite na caixa de texto e aperte enter, ou clique no botão, para adicionar a tarefa"},
-					{id: 1, checked: false, text:  "Arraste o mouse para a direita da tarefa para exclui-lá"},
-					{id: 2, checked: false, text:  "Clique na tarefa, ou no circulo pare marcar como concluido"}
+					{id: 1, checked: false, text:  "Clique na lixeira à direita da tarefa para exclui-lá"},
+					{id: 2, checked: false, text:  "Clique no check pare marcar como concluido"},
+					{id: 3, checked: false, text:  "Agora seus dados são salvos localmente, portanto suas preferências e tarefas não são perdidas"},
 				],
 			}
 		},
