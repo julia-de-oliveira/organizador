@@ -1,19 +1,31 @@
 <template class="bg-dark bg-light">
   <div>
-    <h1 class="text-center mt-2 align-middle">{{defineSprint.title}}</h1>
-    <h3 class="">{{nowSprint/2}}/{{sprintRangeValue}}</h3>
+    
   </div>
-  <Timer :time-left="timeLeft" :TIME_LIMIT="defineSprint.timeLimit"/>
+
+  <div class="container-fluid col-12 d-lg-flex">
+    <div class="col-lg-9">
+      <h1 class="text-center align-middle">{{defineSprint.title}}</h1>
+      <h3 class="text-center">{{formattedCurrentHours}}h de {{formattedTotalHours}}h finalizadas</h3>
+      <Timer :time-left="timeLeft" :TIME_LIMIT="defineSprint.timeLimit"/>
+    </div>
+    
+    <div class="col-lg-3">
+      <h1 class="text-center align-middle">Lista de tarefas</h1>
+      <TodoList/>
+    </div>
+  </div>
 
   <footer>
     <br>
     <br>
-    <p>Made by <a href="https://julyandphantons.netlify.app/" target="_blank">Me</a> click and see more</p>
+    <p>Made by <a href="https://julyandphantons.netlify.app/" target="_blank">Julia</a> click and see more</p>
   </footer>
 </template>
 
 <script>
   import Timer from "@/components/Timer.vue";
+  import TodoList from '@/components/Todo.vue'
 
   export default {
 
@@ -36,12 +48,42 @@
     },
 
     components: {
-      Timer
+      Timer,
+      TodoList,
     },
 
     computed: {
       timeLeft() {
         return this.timeLimit - this.timePassed
+      },
+
+      formattedTotalHours() {
+        const totalTime = (((this.workRangeValue + this.pauseRangeValue)*this.sprintRangeValue)-this.pauseRangeValue)/60 + this.restRangeValue/60;
+        const hours = Math.floor(totalTime / 60);
+        let seconds = totalTime % 60;
+
+        if (seconds < 10) {
+          seconds = `0${seconds}`;
+        }
+
+        return `${hours}:${seconds}`;
+      },
+
+      formattedCurrentHours() {
+        let totalTime = 0;
+        for (var i = 0; i < this.nowSprint-1; i++) {
+          if(i%2 == 0) totalTime += this.pauseRangeValue/60;
+          else totalTime += this.workRangeValue/60;
+        }
+
+        const hours = Math.floor(totalTime / 60);
+        let seconds = totalTime % 60;
+
+        if (seconds < 10) {
+          seconds = `0${seconds}`;
+        }
+
+        return `${hours}:${seconds}`;
       },
 
       defineSprint() {

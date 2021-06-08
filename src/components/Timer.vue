@@ -7,22 +7,22 @@
 			</g>
 		</svg>
 		
-		<span class="base-timer__label">{{ formattedTimeLeft }}</span>
+		<span class="base-timer__label">{{formattedTimeLeft}}</span>
 	</div>
 	<div class="mx-auto m-5">
 		<button type="button" class="btn btn-sm m-2 rounded-circle" v-on:click="reset()">
-			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="yellow" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#d600a4" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
 				<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
 				<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
 			</svg>
-</button>
+		</button>
 		<button type="button" class="btn btn-sm m-2 rounded-circle" :class="{ disabled: isPlayActive }" v-on:click="playTimer()">
-			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="blue" class="bi bi-play" viewBox="0 0 16 16">
+			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#7409b5" class="bi bi-play" viewBox="0 0 16 16">
 				<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
 			</svg>
-</button>
+		</button>
 		<button type="button" class="btn btn-sm m-2 rounded-circle" :class="{ disabled: isPauseActive }" v-on:click="pauseTimer()">
-			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="blue" class="bi bi-pause" viewBox="0 0 16 16">
+			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#7409b5" class="bi bi-pause" viewBox="0 0 16 16">
 				<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
 			</svg>
 		</button>
